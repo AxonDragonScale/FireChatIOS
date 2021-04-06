@@ -8,18 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		37B1F4E8261B731B0068311C /* FireChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1F4E7261B731B0068311C /* FireChatApp.swift */; };
-		37B1F4EA261B731B0068311C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1F4E9261B731B0068311C /* ContentView.swift */; };
+		37B1F4EA261B731B0068311C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1F4E9261B731B0068311C /* MainView.swift */; };
 		37B1F4EC261B731C0068311C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37B1F4EB261B731C0068311C /* Assets.xcassets */; };
 		37B1F4EF261B731C0068311C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37B1F4EE261B731C0068311C /* Preview Assets.xcassets */; };
+		37FF1464261CDA3B00DE76C1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF1463261CDA3B00DE76C1 /* LoginView.swift */; };
+		37FF1467261CDD6D00DE76C1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF1466261CDD6D00DE76C1 /* RegisterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		37B1F4E4261B731B0068311C /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37B1F4E7261B731B0068311C /* FireChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireChatApp.swift; sourceTree = "<group>"; };
-		37B1F4E9261B731B0068311C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		37B1F4E9261B731B0068311C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		37B1F4EB261B731C0068311C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37B1F4EE261B731C0068311C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37B1F4F0261B731C0068311C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37FF1463261CDA3B00DE76C1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		37FF1466261CDD6D00DE76C1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +56,12 @@
 		37B1F4E6261B731B0068311C /* FireChat */ = {
 			isa = PBXGroup;
 			children = (
+				37B1F4FB261B766A0068311C /* Resources */,
+				37B1F4F9261B765D0068311C /* ViewModels */,
+				37B1F4F8261B76560068311C /* Views */,
+				37B1F4F7261B764C0068311C /* Models */,
 				37B1F4E7261B731B0068311C /* FireChatApp.swift */,
-				37B1F4E9261B731B0068311C /* ContentView.swift */,
+				37B1F4E9261B731B0068311C /* MainView.swift */,
 				37B1F4EB261B731C0068311C /* Assets.xcassets */,
 				37B1F4F0261B731C0068311C /* Info.plist */,
 				37B1F4ED261B731C0068311C /* Preview Content */,
@@ -67,6 +75,36 @@
 				37B1F4EE261B731C0068311C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		37B1F4F7261B764C0068311C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		37B1F4F8261B76560068311C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				37FF1463261CDA3B00DE76C1 /* LoginView.swift */,
+				37FF1466261CDD6D00DE76C1 /* RegisterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		37B1F4F9261B765D0068311C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		37B1F4FB261B766A0068311C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +176,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B1F4EA261B731B0068311C /* ContentView.swift in Sources */,
+				37FF1464261CDA3B00DE76C1 /* LoginView.swift in Sources */,
+				37FF1467261CDD6D00DE76C1 /* RegisterView.swift in Sources */,
+				37B1F4EA261B731B0068311C /* MainView.swift in Sources */,
 				37B1F4E8261B731B0068311C /* FireChatApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
