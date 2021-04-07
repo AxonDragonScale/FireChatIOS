@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    // Change next to an enum ??
     @State private var next: String? = nil
     
     var body: some View {
@@ -18,9 +19,8 @@ struct MainView: View {
                 
                 VStack(alignment: .leading) {
                     Text("Welcome to")
-                        .foregroundColor(.white)
-        
                     Text("FireChat")
+                        .foregroundColor(.white)
                 }
                 .font(Font.largeTitle.bold())
                 .padding()
