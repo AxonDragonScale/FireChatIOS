@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 // TODO:
-// Add validation checks for all fields
+// Add validation checks for all fields -
+//    * First and Last name not empty
+//    * Email has proper format
+//    * Password has length > 8, a small letter, a caps letter and a number
+// Show red border or something if field is invalid?
 
 struct RegisterView: View {
     @State private var firstName: String = ""
@@ -17,8 +22,28 @@ struct RegisterView: View {
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     
+    // For nav/actions
+    @State private var isProfilePicActionSheetPresented = false
+    @State private var next: String? = nil
+    
     var body: some View {
         VStack {
+            Image(systemName: "person.crop.circle.fill.badge.plus")
+                .font(.system(size: 100))
+                .padding(.bottom, 40)
+                .onTapGesture { isProfilePicActionSheetPresented = true }
+                .actionSheet(isPresented: $isProfilePicActionSheetPresented) {
+                    ActionSheet(
+                        title: Text("Profile Picture"),
+                        message: Text("How would you like to select a profile picture"),
+                        buttons: [
+                            .default(Text("Take a picture"), action: takePictureInCamera),
+                            .default(Text("Choose a picture"), action: selectPictureFromLibrary),
+                            .cancel()
+                        ]
+                    )
+                }
+                        
             VStack(alignment: .leading) {
                 HStack {
                     VStack(alignment: .leading) {
@@ -51,9 +76,6 @@ struct RegisterView: View {
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .padding(.bottom)
-//                    .overlay(RoundedRectangle(cornerRadius: 25.0).stroke(Color.gray))
-//                    .background(Color(UIColor.lightGray))
-//                    .cornerRadius(10.0)
                 
                 Text("Password")
                     .bold()
@@ -78,8 +100,10 @@ struct RegisterView: View {
                 Text("Register")
                     .font(.largeTitle)
                     .bold()
-//                    .background(Color.purple)
-//                    .cornerRadius(5.0)
+            }
+                        
+            NavigationLink(destination: Text("Home"), tag: "Home", selection: $next) {
+                EmptyView()
             }
         }
         .navigationBarTitle("Create an account", displayMode: .inline)
@@ -87,9 +111,44 @@ struct RegisterView: View {
     }
     
     private func register() {
-        // validate data
-        // register
+        // Validate the user's registration data
+        guard !firstName.isEmpty
+                && !lastName.isEmpty
+                && validateEmail(email)
+                && validatePassword(password, confirmPassword) else {
+            print("Validation failed. Cannot register user.");
+            return
+        }
+        
+        // Register user with firebase
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
+            guard let result = authResult, error == nil else {
+                print("Error creating user.")
+                return
+            }
+            
+            print("User created: \(result.user)")
+        })
+        
         // navigate to homepage?
+    }
+    
+    private func validateEmail(_ email: String) -> Bool {
+        return !email.isEmpty
+    }
+    
+    private func validatePassword(_ password: String, _ confirmPassword: String) -> Bool {
+        return !password.isEmpty && password == confirmPassword
+    }
+    
+    // Pick image - https://augmentedcode.io/2020/11/22/using-an-image-picker-in-swiftui/
+    // No native way in swiftui yet, have to wrap UIKit Version
+    private func takePictureInCamera() {
+        // open camera and take pic
+    }
+    
+    private func selectPictureFromLibrary() {
+        // select pic from photos
     }
 }
 

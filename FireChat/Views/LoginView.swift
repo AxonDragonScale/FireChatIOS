@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 // TODO:
 // Auto focus on next text field
@@ -22,6 +23,10 @@ struct LoginView: View {
     
     var body: some View {
         VStack(alignment: .center) {
+            Image(systemName: "message.circle.fill")
+                .font(.system(size: 150))
+                .padding(.vertical, 20)
+                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             VStack(alignment: .leading) {
                 Text("Email")
                     .bold()
@@ -31,9 +36,6 @@ struct LoginView: View {
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .padding(.bottom)
-//                    .overlay(RoundedRectangle(cornerRadius: 25.0).stroke(Color.gray))
-//                    .background(Color(UIColor.lightGray))
-//                    .cornerRadius(10.0)
                 
                 Text("Password")
                     .bold()
@@ -46,17 +48,17 @@ struct LoginView: View {
             Spacer()
                 .frame(width: 1, height: 50)
             
-            // TODO: Change destination to homepage or something
             Button(action: login) {
                 Text("Log In")
                     .font(.largeTitle)
                     .bold()
-//                    .background(Color.purple)
-//                    .cornerRadius(5.0)
             }
             
-            // Alert
-            EmptyView()
+            Spacer()
+            
+            // NON UI STUFF ---------------------------------------------------------------------------------------------------------
+            Text("")
+                .hidden()
                 .alert(isPresented: $alertPresented) {
                     Alert(
                         title: Text("Incorrect credentials"),
@@ -93,6 +95,14 @@ struct LoginView: View {
         }
         
         // Login
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { authResult, error in
+            guard let result = authResult, error == nil else {
+                print("Login failed.")
+                return
+            }
+            
+            print("Login in Successful: \(result.user)")
+        })
         
         // set next to Home page?
     }
