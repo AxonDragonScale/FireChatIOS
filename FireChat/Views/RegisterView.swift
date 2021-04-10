@@ -24,6 +24,7 @@ struct RegisterView: View {
     
     // For nav/actions
     @State private var isProfilePicActionSheetPresented = false
+    @State private var alertType: AlertType?
     @State private var next: String? = nil
     
     var body: some View {
@@ -101,13 +102,47 @@ struct RegisterView: View {
                     .font(.largeTitle)
                     .bold()
             }
+            
+            // ---------- NON UI STUFF ----------
+            alert()
                         
-            NavigationLink(destination: Text("Home"), tag: "Home", selection: $next) {
+            NavigationLink(destination: HomeView(), tag: "Home", selection: $next) {
                 EmptyView()
             }
         }
         .navigationBarTitle("Create an account", displayMode: .inline)
         .padding()
+    }
+    
+    private func alert() -> some View {
+        Text("")
+            .hidden()
+            .alert(item: $alertType) { type -> Alert in
+                switch type {
+                case .UserAlreadyExists:
+                    return getAlert(title: "User already exists.", message: "A user with the same email already exists.")
+                case .InvalidData:
+                    return getAlert(title: "Invalid Data", message: "Please make sure the data is valid")
+                case .Default:
+                    return getAlert(title: "Error", message: "Something went wrong")
+                }
+            }
+    }
+    
+    private func getAlert(title: String, message: String) -> Alert {
+        return Alert(
+            title: Text(title),
+            message: Text(message)
+        )
+    }
+    
+    private func showAlert(for type: AlertType) {
+        alertType = type
+    }
+    
+    enum AlertType: Identifiable {
+        var id: AlertType { self }
+        case UserAlreadyExists, InvalidData, Default
     }
     
     private func register() {
@@ -116,28 +151,44 @@ struct RegisterView: View {
                 && !lastName.isEmpty
                 && validateEmail(email)
                 && validatePassword(password, confirmPassword) else {
-            print("Validation failed. Cannot register user.");
+            showAlert(for: .InvalidData)
             return
         }
         
-        // Register user with firebase
+        // Register user with firebase if not already registered
         FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
             guard let result = authResult, error == nil else {
                 print("Error creating user.")
+                let errorCode = AuthErrorCode(rawValue: error!._code)
+                switch errorCode {
+                case .invalidEmail:
+                    alertType = .InvalidData
+                case .emailAlreadyInUse:
+                    alertType = .UserAlreadyExists
+                default:
+                    alertType = .Default
+                }
                 return
             }
             
-            print("User created: \(result.user)")
+            // Insert user in DB
+            DatabaseManager.instance.insertUser(with: User(firstName: firstName,
+                                                           lastName: lastName,
+                                                           email: email,
+                                                           userId: result.user.uid))
+            
+            // navigate to homepage
+            next = "Home"
         })
-        
-        // navigate to homepage?
     }
     
     private func validateEmail(_ email: String) -> Bool {
+        // TODO: Proper validation
         return !email.isEmpty
     }
     
     private func validatePassword(_ password: String, _ confirmPassword: String) -> Bool {
+        // TODO: Validate length, small letter, capital letter and symbol
         return !password.isEmpty && password == confirmPassword
     }
     
@@ -148,7 +199,7 @@ struct RegisterView: View {
     }
     
     private func selectPictureFromLibrary() {
-        // select pic from photos
+        // select pic from photo Library
     }
 }
 

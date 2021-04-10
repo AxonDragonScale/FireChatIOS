@@ -56,7 +56,7 @@ struct LoginView: View {
             
             Spacer()
             
-            // NON UI STUFF ---------------------------------------------------------------------------------------------------------
+            // ---------- NON UI STUFF ----------
             Text("")
                 .hidden()
                 .alert(isPresented: $alertPresented) {
@@ -66,7 +66,7 @@ struct LoginView: View {
                     )
                 }
             
-            NavigationLink(destination: Text("Home Page"), tag: "Home", selection: $next) {
+            NavigationLink(destination: HomeView(), tag: "Home", selection: $next) {
                 EmptyView()
             }
             

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct MainView: View {
     // Change next to an enum ??
@@ -25,14 +26,28 @@ struct MainView: View {
                 .font(Font.largeTitle.bold())
                 .padding()
                 
+                // ---------- NON UI STUFF ----------
                 NavigationLink(destination: LoginView(), tag: "Login", selection: $next) {
+                    EmptyView()
+                }
+                NavigationLink(destination: HomeView(), tag: "Home", selection: $next) {
                     EmptyView()
                 }
             }
             .onAppear() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    next = "Login"
-                }
+                validateAuth()
+            }
+        }
+    }
+    
+    private func validateAuth() {
+        if FirebaseAuth.Auth.auth().currentUser == nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                next = "Login"
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                next = "Home"
             }
         }
     }
