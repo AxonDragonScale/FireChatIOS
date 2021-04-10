@@ -20,14 +20,11 @@ struct HomeView: View {
                     Label("Profile", systemImage: "person.circle")
                 }
         }
-        .navigationBarBackButtonHidden(true)
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            HomeView()
-        }
+        HomeView()
     }
 }

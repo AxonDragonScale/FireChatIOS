@@ -14,6 +14,8 @@
 		3792F7312620EC9A00F9AEAD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3792F7302620EC9A00F9AEAD /* HomeView.swift */; };
 		3792F7342620FA7900F9AEAD /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3792F7332620FA7900F9AEAD /* ChatsView.swift */; };
 		3792F7372620FA8600F9AEAD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3792F7362620FA8600F9AEAD /* ProfileView.swift */; };
+		3792F7732622348100F9AEAD /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3792F7722622348100F9AEAD /* SplashView.swift */; };
+		3792F77D26223A5400F9AEAD /* ScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3792F77C26223A5400F9AEAD /* ScreenRouter.swift */; };
 		37B1F4E8261B731B0068311C /* FireChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1F4E7261B731B0068311C /* FireChatApp.swift */; };
 		37B1F4EA261B731B0068311C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1F4E9261B731B0068311C /* MainView.swift */; };
 		37B1F4EC261B731C0068311C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37B1F4EB261B731C0068311C /* Assets.xcassets */; };
@@ -30,6 +32,8 @@
 		3792F7302620EC9A00F9AEAD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3792F7332620FA7900F9AEAD /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
 		3792F7362620FA8600F9AEAD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3792F7722622348100F9AEAD /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		3792F77C26223A5400F9AEAD /* ScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRouter.swift; sourceTree = "<group>"; };
 		37B1F4E4261B731B0068311C /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37B1F4E7261B731B0068311C /* FireChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireChatApp.swift; sourceTree = "<group>"; };
 		37B1F4E9261B731B0068311C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -80,7 +84,6 @@
 				37B1F4F8261B76560068311C /* Views */,
 				37B1F4F7261B764C0068311C /* Models */,
 				37B1F4E7261B731B0068311C /* FireChatApp.swift */,
-				37B1F4E9261B731B0068311C /* MainView.swift */,
 				37B1F4EB261B731C0068311C /* Assets.xcassets */,
 				371347E4261F74310040182C /* GoogleService-Info.plist */,
 				37B1F4F0261B731C0068311C /* Info.plist */,
@@ -109,11 +112,14 @@
 		37B1F4F8261B76560068311C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37B1F4E9261B731B0068311C /* MainView.swift */,
 				37FF1463261CDA3B00DE76C1 /* LoginView.swift */,
 				37FF1466261CDD6D00DE76C1 /* RegisterView.swift */,
 				3792F7302620EC9A00F9AEAD /* HomeView.swift */,
 				3792F7332620FA7900F9AEAD /* ChatsView.swift */,
 				3792F7362620FA8600F9AEAD /* ProfileView.swift */,
+				3792F7722622348100F9AEAD /* SplashView.swift */,
+				3792F77C26223A5400F9AEAD /* ScreenRouter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,8 +274,10 @@
 				37FF1464261CDA3B00DE76C1 /* LoginView.swift in Sources */,
 				3792F7312620EC9A00F9AEAD /* HomeView.swift in Sources */,
 				37FF1467261CDD6D00DE76C1 /* RegisterView.swift in Sources */,
+				3792F77D26223A5400F9AEAD /* ScreenRouter.swift in Sources */,
 				3792F72E2620CD7800F9AEAD /* User.swift in Sources */,
 				3792F72B2620CBF500F9AEAD /* DatabaseManager.swift in Sources */,
+				3792F7732622348100F9AEAD /* SplashView.swift in Sources */,
 				37B1F4EA261B731B0068311C /* MainView.swift in Sources */,
 				37B1F4E8261B731B0068311C /* FireChatApp.swift in Sources */,
 			);

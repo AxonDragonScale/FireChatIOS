@@ -10,6 +10,7 @@ import Firebase
 
 @main
 struct FireChatApp: App {
+    @StateObject var screenRouter: ScreenRouter = ScreenRouter()
     
     // May need to move this to app delegate for other firebase functionalities
     // https://peterfriese.dev/swiftui-new-app-lifecycle-firebase/
@@ -20,6 +21,7 @@ struct FireChatApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environmentObject(screenRouter)
         }
     }
 }

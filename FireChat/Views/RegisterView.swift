@@ -16,6 +16,8 @@ import FirebaseAuth
 // Show red border or something if field is invalid?
 
 struct RegisterView: View {
+    @EnvironmentObject var screenRouter: ScreenRouter
+    
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var email: String = ""
@@ -25,7 +27,6 @@ struct RegisterView: View {
     // For nav/actions
     @State private var isProfilePicActionSheetPresented = false
     @State private var alertType: AlertType?
-    @State private var next: String? = nil
     
     var body: some View {
         VStack {
@@ -105,10 +106,6 @@ struct RegisterView: View {
             
             // ---------- NON UI STUFF ----------
             alert()
-                        
-            NavigationLink(destination: HomeView(), tag: "Home", selection: $next) {
-                EmptyView()
-            }
         }
         .navigationBarTitle("Create an account", displayMode: .inline)
         .padding()
@@ -177,8 +174,8 @@ struct RegisterView: View {
                                                            email: email,
                                                            userId: result.user.uid))
             
-            // navigate to homepage
-            next = "Home"
+            // Go to Home Screen
+            screenRouter.toScreen(.Home)
         })
     }
     

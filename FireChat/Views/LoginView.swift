@@ -15,6 +15,8 @@ import FirebaseAuth
 // Change alert text based on issue
 
 struct LoginView: View {
+    @EnvironmentObject var screenRouter: ScreenRouter
+    
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -22,66 +24,64 @@ struct LoginView: View {
     @State private var alertPresented: Bool = false
     
     var body: some View {
-        VStack(alignment: .center) {
-            Image(systemName: "message.circle.fill")
-                .font(.system(size: 150))
-                .padding(.vertical, 20)
-                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-            VStack(alignment: .leading) {
-                Text("Email")
-                    .bold()
-                    .foregroundColor(.gray)
-                TextField("ronak@example.com", text: $email)
-                    .font(.title)
-                    .autocapitalization(.none)
-                    .keyboardType(.emailAddress)
-                    .padding(.bottom)
-                
-                Text("Password")
-                    .bold()
-                    .foregroundColor(.gray)
-                SecureField("asdf@1234", text: $password)
-                    .font(.title)
-                    .autocapitalization(.none)
-            }
-            
-            Spacer()
-                .frame(width: 1, height: 50)
-            
-            Button(action: login) {
-                Text("Log In")
-                    .font(.largeTitle)
-                    .bold()
-            }
-            
-            Spacer()
-            
-            // ---------- NON UI STUFF ----------
-            Text("")
-                .hidden()
-                .alert(isPresented: $alertPresented) {
-                    Alert(
-                        title: Text("Incorrect credentials"),
-                        message: Text("The email or password cannot be empty")
-                    )
+        NavigationView {
+            VStack(alignment: .center) {
+                Image(systemName: "message.circle.fill")
+                    .font(.system(size: 150))
+                    .padding(.vertical, 20)
+                    .foregroundColor(.blue)
+                VStack(alignment: .leading) {
+                    Text("Email")
+                        .bold()
+                        .foregroundColor(.gray)
+                    TextField("ronak@example.com", text: $email)
+                        .font(.title)
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
+                        .padding(.bottom)
+                    
+                    Text("Password")
+                        .bold()
+                        .foregroundColor(.gray)
+                    SecureField("asdf@1234", text: $password)
+                        .font(.title)
+                        .autocapitalization(.none)
                 }
-            
-            NavigationLink(destination: HomeView(), tag: "Home", selection: $next) {
-                EmptyView()
+                
+                Spacer()
+                    .frame(width: 1, height: 50)
+                
+                Button(action: login) {
+                    Text("Log In")
+                        .font(.largeTitle)
+                        .bold()
+                }
+                
+                Spacer()
+                
+                // ---------- NON UI STUFF ----------
+                Text("")
+                    .hidden()
+                    .alert(isPresented: $alertPresented) {
+                        Alert(
+                            title: Text("Incorrect credentials"),
+                            message: Text("The email or password cannot be empty")
+                        )
+                    }
+                
+                // NavigationLink for RegisterView (Here bcoz navLinks don't work properly inside navBar)
+                NavigationLink(destination: RegisterView(), tag: "Register", selection: $next) {
+                    EmptyView()
+                }
             }
-            
-            // NavigationLink for RegisterView (Here bcoz navLinks don't work properly inside navBar)
-            NavigationLink(destination: RegisterView(), tag: "Register", selection: $next) {
-                EmptyView()
-            }
+            .navigationBarTitle("Log In", displayMode: .automatic)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(
+                trailing: Button(action: gotoRegisterView) {
+                    Text("Register");
+                })
+            .padding()
         }
-        .navigationBarTitle("Log In", displayMode: .automatic)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(
-            trailing: Button(action: gotoRegisterView) {
-                Text("Register");
-            })
-        .padding()
     }
     
     private func gotoRegisterView() {
@@ -104,7 +104,8 @@ struct LoginView: View {
             print("Login in Successful: \(result.user)")
         })
         
-        // set next to Home page?
+        // Go to Home Screen
+        screenRouter.toScreen(.Home)
     }
 }
 
