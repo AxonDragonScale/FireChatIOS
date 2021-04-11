@@ -88,7 +88,6 @@
 				371347E4261F74310040182C /* GoogleService-Info.plist */,
 				37B1F4F0261B731C0068311C /* Info.plist */,
 				37B1F4ED261B731C0068311C /* Preview Content */,
-				3792F72A2620CBF500F9AEAD /* DatabaseManager.swift */,
 			);
 			path = FireChat;
 			sourceTree = "<group>";
@@ -104,6 +103,7 @@
 		37B1F4F7261B764C0068311C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3792F72A2620CBF500F9AEAD /* DatabaseManager.swift */,
 				3792F72D2620CD7800F9AEAD /* User.swift */,
 			);
 			path = Models;

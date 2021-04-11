@@ -204,6 +204,7 @@ struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             RegisterView()
+                .environmentObject(ScreenRouter())
         }
     }
 }

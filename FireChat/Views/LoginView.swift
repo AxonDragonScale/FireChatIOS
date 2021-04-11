@@ -111,8 +111,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            LoginView()
-        }
+        LoginView()
+            .environmentObject(ScreenRouter())
     }
 }

@@ -11,10 +11,22 @@ import FirebaseAuth
 struct ProfileView: View {
     @EnvironmentObject var screenRouter: ScreenRouter
     
+    @State private var isLogoutActionSheetPresented = false
+    
     var body: some View {
         NavigationView {
             Text("ProfileView")
-                .navigationBarItems(trailing: Button(action: logout) {
+                .actionSheet(isPresented: $isLogoutActionSheetPresented) {
+                    ActionSheet(
+                        title: Text("Do you want to Log out?"),
+                        buttons: [
+                            .destructive(Text("Logout"), action: logout),
+                            .cancel()
+                        ]
+                    )
+                }
+                .navigationTitle("Profile")
+                .navigationBarItems(trailing: Button(action: { isLogoutActionSheetPresented = true }) {
                     Text("Logout")
                 })
         }
@@ -33,9 +45,8 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
-            NavigationView {
-                ProfileView()
-            }
+            ProfileView()
+                .environmentObject(ScreenRouter())
         }
     }
 }
